@@ -1,0 +1,176 @@
+:root {
+  --bg: #f2f6f5;
+  --panel: #ffffff;
+  --text: #12312b;
+  --accent: #0b8f68;
+  --accent-2: #ffb703;
+  --danger: #bd1e1e;
+  --ok: #0f7f35;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top, #d7ece5 0%, var(--bg) 55%);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.screen {
+  display: none;
+  background: var(--panel);
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 12px 30px rgba(14, 48, 41, 0.12);
+}
+
+.screen.active {
+  display: block;
+}
+
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+.options {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.btn {
+  border: 1px solid #9ebcb4;
+  background: #ecf7f3;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn.small {
+  min-width: 66px;
+}
+
+.actions,
+.manual-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.stat-card {
+  border: 1px solid #d4e5e0;
+  border-radius: 12px;
+  padding: 10px;
+  background: #f8fcfb;
+}
+
+.stat-card p {
+  margin: 4px 0;
+}
+
+.status {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.status.ok {
+  color: var(--ok);
+}
+
+.status.fail {
+  color: var(--danger);
+}
+
+.total,
+.hint,
+.small-text {
+  opacity: 0.85;
+}
+
+.scan-entry,
+.manual-box,
+.results-box,
+.card-box,
+.scanner-panel,
+.question-box {
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid #d8e9e3;
+  border-radius: 12px;
+  background: #fcfffe;
+}
+
+.link {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+#scannerQrCanvas {
+  display: block;
+  border: 1px solid #d5e4df;
+  border-radius: 10px;
+  background: white;
+}
+
+#camera {
+  width: 100%;
+  max-height: 360px;
+  background: #0d0d0d;
+  border-radius: 12px;
+  border: 2px solid #d8e9e3;
+}
+
+#cardCanvas {
+  width: min(100%, 320px);
+  background: white;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 12px;
+  }
+
+  .screen {
+    padding: 14px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

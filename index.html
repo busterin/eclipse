@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Escaneable</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <section id="coverScreen" class="screen active">
+        <h1>Quiz Escaneable</h1>
+        <p>
+          Demo inspirada en Plickers: una tarjeta QR, 4 orientaciones (A, B, C,
+          D).
+        </p>
+        <button id="startBtn" class="btn primary">Comenzar</button>
+      </section>
+
+      <section id="quizScreen" class="screen">
+        <header class="question-box">
+          <h2 id="questionText">Pregunta de prueba</h2>
+          <p>¿Cuál es la opción correcta en este ejemplo?</p>
+          <ul class="options">
+            <li><strong>A:</strong> Opción correcta (respuesta esperada)</li>
+            <li><strong>B:</strong> Opción alternativa 1</li>
+            <li><strong>C:</strong> Opción alternativa 2</li>
+            <li><strong>D:</strong> Opción alternativa 3</li>
+          </ul>
+          <p class="hint">Correcta configurada: <strong>A</strong></p>
+        </header>
+
+        <section class="results-box">
+          <h3>Conteo y porcentaje</h3>
+          <div id="statsGrid" class="stats-grid"></div>
+          <p id="totalAnswers" class="total">Total respuestas: 0</p>
+        </section>
+
+        <section class="actions">
+          <button id="confirmBtn" class="btn primary">Confirmar</button>
+          <button id="resetBtn" class="btn">Reiniciar conteo</button>
+          <p id="statusMsg" class="status"></p>
+        </section>
+
+        <section class="manual-box">
+          <h3>Registro manual (prueba rápida)</h3>
+          <div class="manual-actions">
+            <button class="btn small" data-manual="A">+ A</button>
+            <button class="btn small" data-manual="B">+ B</button>
+            <button class="btn small" data-manual="C">+ C</button>
+            <button class="btn small" data-manual="D">+ D</button>
+          </div>
+        </section>
+
+        <section class="scan-entry">
+          <h3>Escaneo con móvil</h3>
+          <p>
+            Abre esta misma web en el móvil en <strong>modo escáner</strong>:
+          </p>
+          <a id="scannerLink" class="link" href="#">Abrir modo escáner</a>
+          <canvas id="scannerQrCanvas" width="220" height="220"></canvas>
+          <p class="small-text">
+            Esta demo sincroniza entre pestañas/dispositivos usando el canal del
+            navegador (ideal para pruebas en la misma red/navegador). En una
+            siguiente iteración podemos añadir backend para sincronización
+            robusta multi-dispositivo.
+          </p>
+        </section>
+      </section>
+
+      <section id="scannerScreen" class="screen">
+        <h2>Modo Escáner</h2>
+        <p>
+          Coloca la tarjeta frente a la cámara. Según la orientación se detecta
+          A, B, C o D.
+        </p>
+        <video id="camera" autoplay playsinline></video>
+        <canvas id="captureCanvas" class="hidden"></canvas>
+        <div class="scanner-panel">
+          <p>Última lectura: <strong id="lastRead">-</strong></p>
+          <p>Estado cámara: <span id="cameraStatus">Iniciando...</span></p>
+          <button id="sendReadBtn" class="btn primary" disabled>
+            Enviar respuesta
+          </button>
+        </div>
+
+        <section class="card-box">
+          <h3>Tarjeta QR (imprimible)</h3>
+          <canvas id="cardCanvas" width="320" height="420"></canvas>
+          <button id="downloadCardBtn" class="btn">Descargar tarjeta QR (PNG)</button>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
