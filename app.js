@@ -156,25 +156,28 @@ function setupCardCanvas() {
   ctx.font = "bold 20px Trebuchet MS";
   ctx.fillText("Tarjeta Quiz", 96, 30);
 
-  QRCode.toCanvas(
-    CARD_PAYLOAD,
-    { width: 240, margin: 1 },
-    (err, qrCanvas) => {
-      if (err) return;
-      ctx.drawImage(qrCanvas, 40, 60);
-
-      ctx.fillStyle = "#111";
-      ctx.font = "bold 28px Trebuchet MS";
-      ctx.fillText("A", 148, 52);
-      ctx.fillText("B", 286, 188);
-      ctx.fillText("C", 148, 350);
-      ctx.fillText("D", 12, 188);
-
-      ctx.font = "14px Trebuchet MS";
-      ctx.fillText("Gira la tarjeta para responder A/B/C/D", 40, 388);
-      ctx.fillText("Mantener centrada al escanear", 84, 406);
+  const qrCanvas = document.createElement("canvas");
+  QRCode.toCanvas(qrCanvas, CARD_PAYLOAD, { width: 240, margin: 1 }, (err) => {
+    if (err) {
+      ctx.fillStyle = "#bd1e1e";
+      ctx.font = "bold 14px Trebuchet MS";
+      ctx.fillText("Error generando QR de la tarjeta", 52, 220);
+      return;
     }
-  );
+
+    ctx.drawImage(qrCanvas, 40, 60);
+
+    ctx.fillStyle = "#111";
+    ctx.font = "bold 28px Trebuchet MS";
+    ctx.fillText("A", 148, 52);
+    ctx.fillText("B", 286, 188);
+    ctx.fillText("C", 148, 350);
+    ctx.fillText("D", 12, 188);
+
+    ctx.font = "14px Trebuchet MS";
+    ctx.fillText("Gira la tarjeta para responder A/B/C/D", 40, 388);
+    ctx.fillText("Mantener centrada al escanear", 84, 406);
+  });
 }
 
 function getOrientationFromLocation(location) {
